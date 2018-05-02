@@ -1,0 +1,52 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Wedding Planner</a>
+            </div>
+            <span class="float-right">
+                <span class="navbar-brand">Welcome</span>
+                <a asp-area="" asp-controller="Planner" asp-action="Add" class="navbar-brand">New Wedding</a>
+                <a class="navbar-brand" href="/">log off</a>
+            </span>
+        </div>
+</nav>
+
+<h1>Welcome to the Wedding Planner</h1>
+<table>
+    <tr>
+        <th>Wedding</th>
+        <th>Date</th>
+        <th>Guests</th>
+        <th>Action</th>
+    </tr>
+    @foreach(Wedding wedding in @ViewBag.all_weddings)
+    {
+        <form action="/action" method="POST">
+            <tr>
+                <input type="hidden" value="@wedding.weddingid" name="WeddingId">
+                <td><a href="/show-wedding/@wedding.weddingid">@wedding.wedder_one &  @wedding.wedder_two</a></td>
+                <td>@wedding.date.ToString("MMM dd, yyyy")</td>
+                <td>@wedding.guests.Count</td>
+                @if(@wedding.userid == @ViewBag.user)
+                {
+                    <td><input type="submit" name="action" value="Delete"></td>
+                }
+                else
+                {
+                    @if(@wedding.guests.Exists(u => u.userid == @ViewBag.user))
+                    {
+                        <td><input type="submit" name="action" value="Un-RSVP"></td>
+                    }
+                    else
+                    {
+                        <td><input type="submit" name="action" value="RSVP"></td>
+                    }
+                }
+            </tr>
+        </form>
+    }
+</table>
+
+<a href="/add-wedding">New Wedding</a>
+
+

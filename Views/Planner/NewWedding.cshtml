@@ -1,0 +1,39 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Wedding Planner</a>
+            </div>
+            <span class="float-right">
+                <a asp-area="" asp-controller="Planner" asp-action="Dashboard" class="navbar-brand">Dashboard</a>
+                <a class="navbar-brand" href="/">Log Out</a>
+            </span>
+        </div>
+</nav>
+
+<h1>Plan Your Wedding</h1>
+@model wedding_planner.Models.WedFormViewModel
+<form asp-controller="Planner" asp-action="Create" method="POST">
+    <br>
+    <label asp-for="wedder_one"></label>
+    <input asp-for="wedder_one"/>
+    <br>
+    <span asp-validation-for="wedder_one" class="text-danger"></span>
+    <br>
+    <label asp-for="wedder_two"></label>
+    <input asp-for="wedder_two"/>
+    <br>
+    <span asp-validation-for="wedder_two" class="text-danger"></span>
+    <br>
+    <label asp-for="date"></label>
+    <input asp-for="date"/>
+    <br>
+    <span asp-validation-for="date" class="text-danger"></span>
+    <span class="text-danger">@TempData["date_error"]</span>
+    <br>
+    <label asp-for="address"></label>
+    <input asp-for="address"/>
+    <br>
+    <span asp-validation-for="address" class="text-danger"></span>
+    <br>
+    <button type="submit">Create</button>
+</form>

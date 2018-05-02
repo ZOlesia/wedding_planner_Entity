@@ -1,0 +1,36 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Wedding Planner</a>
+            </div>
+            <span class="float-right">
+                <a asp-area="" asp-controller="Planner" asp-action="Dashboard" class="navbar-brand">Dashboard</a>
+                <a asp-area="" asp-controller="Planner" asp-action="Add" class="navbar-brand">New Wedding</a>
+                <a class="navbar-brand" href="/">Log Out</a>
+            </span>
+        </div>
+</nav>
+
+
+<h2>@ViewBag.all_info.wedder_one and @ViewBag.all_info.wedder_two 's Wedding</h2>
+<p>Date : @ViewBag.all_info.date.ToString("MMM dd, yyyy")</p>
+
+<p>Guests: </p>
+
+@foreach(var i in @ViewBag.all_info.guests)
+{
+    <p>@i.user.first_name @i.user.last_name</p>
+}
+
+<p>Address: @ViewBag.all_info.address</p>
+
+
+<div>
+   <iframe
+    width="600"
+    height="450"
+    frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDwpKLZUOM6TYaPRRPcJ8ocWAcG15ZcKrk
+        &q=@ViewBag.all_info.address" allowfullscreen>
+    </iframe>
+</div>
